@@ -13,11 +13,12 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    if @user
-      render json: @user
-    else
+    unless @user
       render json: { error: 'User not found' }, status: :not_found
+      return
     end
+
+    render json: @user
   end
 
   # POST /users
@@ -42,12 +43,13 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    if @user
-      @user.destroy!
-      head :no_content
-    else
+    unless @user
       render json: { error: 'User not found' }, status: :not_found
+      return
     end
+
+    @user.destroy!
+    head :no_content
   rescue ActiveRecord::RecordNotDestroyed => e
     render json: e.record.errors, status: :unprocessable_entity
   end
