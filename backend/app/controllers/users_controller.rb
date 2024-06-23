@@ -13,11 +13,6 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    unless @user
-      render json: { error: 'User not found' }, status: :not_found
-      return
-    end
-
     render json: @user
   end
 
@@ -43,11 +38,6 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    unless @user
-      render json: { error: 'User not found' }, status: :not_found
-      return
-    end
-
     @user.destroy!
     head :no_content
   rescue ActiveRecord::RecordNotDestroyed => e
@@ -59,6 +49,10 @@ class UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find_by(params[:id])
+
+    return if @user
+
+    render json: { error: 'User not found' }, status: :not_found
   end
 
   # Only allow a list of trusted parameters through.
