@@ -1,0 +1,24 @@
+###
+GET http://localhost:3000/users/1/posts
+
+###
+GET http://localhost:3000/users/1/posts/1
+
+###
+POST http://localhost:3000/users/1/posts
+Content-Type: application/json
+
+{
+    "content": "Hello"
+}
+
+###
+PUT http://localhost:3000/users/1/posts/1
+Content-Type: application/json
+
+{
+    "content": "Goodbye"
+}
+
+###
+DELETE http://localhost:3000/users/1/posts/1
