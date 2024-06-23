@@ -7,12 +7,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user = users(:one)
   end
 
-  test 'should get index' do
+  test 'ユーザーの一覧が取得できること' do
     get users_url, as: :json
     assert_response :success
   end
 
-  test 'should create user' do
+  test 'ユーザーが作成できること' do
     assert_difference('User.count') do
       post users_url, params: { user: { name: 'Alice' } }, as: :json
     end
@@ -20,17 +20,23 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :created
   end
 
-  test 'should show user' do
+  test 'ユーザーが取得できること' do
     get user_url(@user), as: :json
     assert_response :success
   end
 
-  test 'should not update user name' do
+  test '存在しないユーザーを取得しようとしたらエラーが返ること' do
+    nonexistent_id = 0
+    get user_url(nonexistent_id), as: :json
+    assert_response :not_found
+  end
+
+  test 'ユーザーの名称は更新できないこと' do
     patch user_url(@user), params: { user: { name: @user.name } }, as: :json
     assert_response :unprocessable_entity
   end
 
-  test 'should destroy user and associated posts' do
+  test 'ユーザーとユーザーに紐づく投稿が削除できること' do
     assert_difference('User.count', -1) do
       assert_difference('Post.count', -1) do
         delete user_url(@user), as: :json
@@ -38,5 +44,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :no_content
+  end
+
+  test '存在しないユーザーを削除しようとしたらエラーが返ること' do
+    nonexistent_id = 0
+    delete user_url(nonexistent_id), as: :json
+    assert_response :not_found
   end
 end
