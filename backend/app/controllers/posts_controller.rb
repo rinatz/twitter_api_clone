@@ -7,9 +7,7 @@ class PostsController < ApplicationController
 
   # GET /users/:user_id/posts
   def index
-    @posts = @user.posts
-
-    render json: @posts
+    render json: @user.posts
   end
 
   # GET /users/:user_id/posts/:id
@@ -45,12 +43,20 @@ class PostsController < ApplicationController
   private
 
   def set_user
-    @user = User.find(params[:user_id])
+    @user = User.find_by(params[:user_id])
+
+    return if @user
+
+    render json: { error: 'User not found' }, status: :not_found
   end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by(params[:id])
+
+    return if @post
+
+    render json: { error: 'Post not found' }, status: :not_found
   end
 
   # Only allow a list of trusted parameters through.
