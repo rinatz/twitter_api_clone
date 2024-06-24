@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :posts
+    resources :friendships, only: %i[index create destroy] do
+      delete :destroy, on: :collection
+    end
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

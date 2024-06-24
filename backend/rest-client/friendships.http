@@ -1,0 +1,18 @@
+###
+GET http://localhost:3000/users/1/friendships
+
+###
+POST http://localhost:3000/users/1/friendships
+Content-Type: application/json
+
+{
+    "friend_id": 2
+}
+
+###
+DELETE http://localhost:3000/users/1/friendships
+Content-Type: application/json
+
+{
+    "friend_id": 2
+}
