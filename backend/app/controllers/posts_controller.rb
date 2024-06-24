@@ -43,7 +43,7 @@ class PostsController < ApplicationController
   private
 
   def set_user
-    @user = User.find_by(params[:user_id])
+    @user = User.find_by(id: params[:user_id])
 
     return if @user
 
@@ -52,7 +52,7 @@ class PostsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.find_by(params[:id])
+    @post = Post.find_by(id: params[:id])
 
     return if @post
 
