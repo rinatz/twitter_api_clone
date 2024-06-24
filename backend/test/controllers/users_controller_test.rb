@@ -14,7 +14,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'ユーザーが作成できること' do
     assert_difference('User.count') do
-      post users_url, params: { user: { name: 'Alice' } }, as: :json
+      post users_url, params: { user: { name: 'Charlie' } }, as: :json
     end
 
     assert_response :created
@@ -31,9 +31,9 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
-  test 'ユーザーの名称は更新できないこと' do
-    patch user_url(@user), params: { user: { name: @user.name } }, as: :json
-    assert_response :unprocessable_entity
+  test 'ユーザーの名称が更新できること' do
+    patch user_url(@user), params: { user: { name: 'Charlie' } }, as: :json
+    assert_response :success
   end
 
   test 'ユーザーとユーザーに紐づく投稿が削除できること' do
