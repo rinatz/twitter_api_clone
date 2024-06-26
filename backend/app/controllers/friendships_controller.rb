@@ -13,7 +13,6 @@ class FriendshipsController < ApplicationController
   # POST /users/:id/friendships
   def create
     @friendship = @user.friendships.build(friend_id: friendship_params[:friend_id])
-    Rails.logger.debug "Friendship: #{@friendship.inspect}"
 
     if @friendship.save
       render json: @friendship, status: :created, location: user_friendship_url(@user, @friendship)
