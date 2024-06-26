@@ -31,10 +31,7 @@ class FriendshipsController < ApplicationController
   private
 
   def set_user
-    Rails.logger.debug "Params: #{params.inspect}"
-
     @user = User.find_by(id: params[:user_id])
-    Rails.logger.debug "User: #{@user.inspect}"
 
     return if @user
 
