@@ -1,0 +1,52 @@
+.sidebar {
+  width: 250px;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: -250px; /* 初期は非表示 */
+  bottom: 0;
+  transition: left 0.3s ease; /* アニメーションの追加 */
+}
+
+.open {
+  left: 0; /* 表示されるときに左にスライド */
+}
+
+.closeButton {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 999;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 50%; /* 丸いボタンにする */
+  width: 40px; /* 幅と高さを同じに設定 */
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  padding-top: 2rem; /* ユーザー名の下にスペースを作る */
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    border-right: none;
+    left: 0;
+  }
+
+  .closeButton {
+    display: none; /* 小さい画面では閉じるボタン非表示 */
+  }
+}

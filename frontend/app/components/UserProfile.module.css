@@ -1,0 +1,21 @@
+.userProfile {
+  padding: 1rem;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #ddd;
+  font-family: 'Noto Sans', sans-serif;
+  text-align: center;
+}
+
+.userName {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.error {
+  color: red;
+}
+
+.loading {
+  color: #666;
+}
